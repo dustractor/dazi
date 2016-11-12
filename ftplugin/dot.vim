@@ -16,7 +16,7 @@ function! s:SeeDot()
     exe 'w! ' . b:tmpfile
     let l:da_cmdstr = printf('dot -Tpng -o %s %s',b:tmpimg,b:tmpfile)
     call system(l:da_cmdstr)
-    let l:zi_cmdstr = printf('feh %s >/dev/null 2>&1 & echo $!',b:tmpimg)
+    let l:zi_cmdstr = printf('feh -x %s >/dev/null 2>&1 & echo $!',b:tmpimg)
     let b:dazipid = system(l:zi_cmdstr)
     echo b:dazipid
 

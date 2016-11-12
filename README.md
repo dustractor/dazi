@@ -21,3 +21,5 @@ or set global ``dazimap`` to the key you want
     let g:dazimap = '<blah>'
 
 
+If you don't have focus-stealing prevention enabled then just use esc to close feh if you want, otherwise, don't worry because the next time you push the preview button it will kill the previous feh proc
+

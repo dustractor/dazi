@@ -1,5 +1,27 @@
 snippet dig "digraph" b
 digraph $1 {
+
+	rankdir = LR;
+
+	bgcolor = Gray30;
+
+
+	node[
+		shape=rect,
+		style=filled,
+		fontcolor=Gray80,
+		color=Gray20,
+		fontname="Liberation Sans",
+		fontsize="12pt";
+		];
+
+	edge[
+		fontname="Liberation Sans",
+		fontcolor=yellowgreen,
+		color=dodgerblue,
+		fontsize="10pt";
+		];
+
 	$0
 }
 endsnippet
