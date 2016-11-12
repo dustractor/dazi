@@ -2,35 +2,32 @@
 if exists('b:dazi') | finish | endif
 let b:dazi = 1
 
-" Save the current file to a temp dir
-" turn that into a temp image
-" and look at that with feh
-" xxx-todo: make the tmpimg stick
+let b:dazipid = 0
+let b:tmpfile = tempname()
+let b:tmpimg = tempname()
+
 function! s:SeeDot()
+    if b:dazipid != 0
+        let l:kl_cmdstr = printf('kill -s 15 %i',b:dazipid)
+        let l:kr = system(l:kl_cmdstr)
+    endif
+
     let l:mypath = expand("%:p")
-    let l:tmpfile = tempname()
-    let l:tmpimg = tempname()
-    exe 'w! ' . l:tmpfile
-    let l:da_cmdstr = 'dot -Tpng -o ' . l:tmpimg . ' ' . l:tmpfile
-    let l:zi_cmdstr = 'feh ' . l:tmpimg . ' &'
+    exe 'w! ' . b:tmpfile
+    let l:da_cmdstr = printf('dot -Tpng -o %s %s',b:tmpimg,b:tmpfile)
     call system(l:da_cmdstr)
-    call system(l:zi_cmdstr)
+    let l:zi_cmdstr = printf('feh %s >/dev/null 2>&1 & echo $!',b:tmpimg)
+    let b:dazipid = system(l:zi_cmdstr)
+    echo b:dazipid
+
 endfunction
 
-" Make a command ( local to the buffer )
-" to call the function
 com -buffer Dazi call s:SeeDot()
 
-" Likewise a mapping, but silenced
+let s:mymap = get(g:,'dazimap','')
 
-if !exists("g:dazimap")
-    let g:dazimap="<F12>"
+if s:mymap != ''
+    exe printf('nnoremap <buffer> %s :silent! Dazi<CR>',s:mymap)
 endif
-exe "nnoremap <buffer> " . g:dazimap " :silent! Dazi<cr>"
 
-" deal with focus-stealing prevention in your openbox rc file:
-" ----------------------------[example]-----------------------
-" <focusNew>yes</focusNew>
-" ------------------------------------------------------------
 
-" That is all
