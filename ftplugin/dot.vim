@@ -4,7 +4,7 @@ let b:dazi = 1
 
 let b:dazipid = 0
 let b:tmpfile = tempname()
-let b:tmpimg = tempname()
+let b:tmpimg = tempname() . ".png"
 echom b:tmpfile
 echom b:tmpimg
 
@@ -26,15 +26,15 @@ function! s:SeeDot()
     elseif has("win32")
         let l:mypath = expand("%:p")
         exe 'w! ' . b:tmpfile
-        let l:close_prev_viewer_command = "taskkill.exe /f /im %s" . expand(b:w32viewerpath.":t")
-        let l:dot_command = printf('"%s" -Tpng -o %s %s',b:w32dotpath,b:tmpimg,b:tmpfile)
-        let l:viewer_command = printf('"%s" %s',b:w32viewerpath,b:tmpimg)
+        " let l:close_prev_viewer_command = 'taskkill.exe /f /im ' . expand(b:w32viewerpath.":t")
+        let l:dot_command = printf('"%s" -Tpng -o "%s" "%s"',b:w32dotpath,b:tmpimg,b:tmpfile)
+        let l:viewer_command = printf('"%s" "%s" /one',b:w32viewerpath,b:tmpimg)
         echom l:dot_command
-        echom l:close_prev_viewer_command
+        " echom l:close_prev_viewer_command
         echom l:viewer_command
-        " call system(l:dot_command)
+        call system(l:dot_command)
         " call system(l:close_prev_viewer_command)
-        " call system(l:viewer_command)
+        call system(l:viewer_command)
     endif
 
 endfunction
