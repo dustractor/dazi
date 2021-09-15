@@ -1,0 +1,18 @@
+digraph foograph{
+    bgcolor="#333333";
+    color="#880000";
+    node[shape="box",style="filled,rounded,dotted",fillcolor="#555555",fontcolor="#cccccc"];
+    subgraph cluster_a{
+      node [style=filled];
+      "5c"  [area=  5 fillcolor=silver];
+      "10c" [area= 10 fillcolor=silver];
+      "20c" [area= 20 fillcolor=silver];
+      "50c" [area= 50 fillcolor=silver];
+      "$1"  [area=100 fillcolor=gold];
+      "$2"  [area=200 fillcolor=gold];
+    };
+    a->b->c;
+    c->d [label="ok"];
+    d->{e,f};
+    f->"5c";
+};

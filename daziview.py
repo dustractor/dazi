@@ -17,7 +17,7 @@ class Application(tk.Tk):
         self.bind("<Escape>",q)
         self.bind("<Control-[>",q)
         self.bind("<Control-c>",q)
-        self.bind("<Button-1>",self.reveal_image)
+        self.bind("<Double-Button-1>",self.reveal_image)
         self.bind("<Key-space>",self.reveal_image)
         self.img = tk.PhotoImage(file=ns.thefile)
         self.label = tk.Label(self,image=self.img)
