@@ -5,6 +5,7 @@ Dazi is a filetype-plugin for GraphViz *.dot files that adds a command for viewi
 
 GraphViz must be installed in order for your system to have the ``dot`` command.
 
+For linux, you need feh to be the image viewer component. On windows, you need python3 with tkinter to view the images.
 
 It adds one command:
 

@@ -21,11 +21,17 @@ function! s:SeeDot()
 
     exe 'w! ' . b:tmpfile
 
-    let l:dot_command = printf('"%s" -Tpng -o "%s" "%s"',s:dotpath,b:tmpimg,b:tmpfile)
+    let l:dot_command = printf('"%s" -Tpng -o "%s" "%s"',
+                \ s:dotpath,b:tmpimg,b:tmpfile)
     call system(l:dot_command)
 
-    let l:path = expand('<sfile>:p:h') . "\\daziview.py"
-    let l:viewer_command = printf('python3 "%s"  "%s"',l:path,b:tmpimg)
+    if has('win32')
+        let l:image_viewer_path = expand('<sfile>:p:h') . "\\daziview.py"
+        let l:viewer_command = printf('python3 "%s"  "%s"',
+                    \ l:image_viewer_path,b:tmpimg)
+    else
+        let l:viewer_command = printf('feh  "%s"', b:tmpimg)
+    endif
     call system(l:viewer_command)
 
 endfunction
