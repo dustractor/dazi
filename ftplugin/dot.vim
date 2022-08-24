@@ -9,7 +9,7 @@ function! s:SeeDot()
 
     let l:mypath = expand("%:p")
     exe 'w! ' . b:tmpfile
-    let l:dotpath = "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe"
+    let l:dotpath = "C:\\Program Files\\Graphviz\\bin\\dot.exe"
     let l:viewerpath ="C:\\Program Files\\IrfanView\\i_view64.exe" 
     let l:da_cmdstr = printf('"%s" -Tpng -o "%s" "%s"',l:dotpath,b:tmpimg,b:tmpfile)
     echom l:da_cmdstr
